@@ -1,0 +1,42 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion compile_sdk
+    buildToolsVersion build_tools
+    defaultConfig {
+        applicationId app_id
+        minSdkVersion min_sdk
+        targetSdkVersion target_sdk
+        versionCode version_code
+        versionName version_name
+        signingConfigs.configure { debug }
+    }
+    buildTypes {
+        release {
+            debug {
+                debuggable true
+            }
+            release {
+                debuggable false
+                minifyEnabled false
+                proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            }
+        }
+    }
+}
+
+dependencies {
+    // BASE
+    implementation "androidx.appcompat:appcompat:$compat_version"
+    implementation "androidx.core:core-ktx:$compat_version"
+    implementation "androidx.constraintlayout:constraintlayout:$constraint_version"
+    implementation "androidx.coordinatorlayout:coordinatorlayout:$compat_version"
+    implementation "com.google.android.material:material:$legacy_support_version"
+    // LIFECYCLE
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+    // MAP
+    implementation "com.google.android.gms:play-services-maps:$gmap_version"
+}
